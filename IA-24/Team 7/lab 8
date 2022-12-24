@@ -1,0 +1,164 @@
+import java.util.Objects;
+
+public class medicament {
+    private int duration;
+    private int cost;
+
+    public medicament(int duration, int cost, String name) {
+        this.duration = duration;
+        this.cost = cost;
+        this.name = name;
+    }
+
+    public medicament(int cost) {
+        this(1,cost,"Невідомо");
+    }
+
+    private String name;
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        medicament that = (medicament) o;
+        return duration == that.duration && cost == that.cost && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(duration, cost, name);
+    }
+
+    public void useMedicaments(){
+        System.out.println("Ви прийняли лікарсто: '" + name + "\'" + ", наступну дозу прийміть через: " + duration);
+    }
+
+    public void useMedicaments(Object a){
+
+        System.out.println("Ви прийняли лікарсто: '" + name + "\'" + " з лікарством: " + a + ", наступну дозу прийміть через: " + duration);
+    }
+
+    @Override
+    public String toString() {
+        return "medicament{" +
+                "duration=" + duration +
+                ", cost=" + cost +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+}
+
+public class Pills extends medicament{
+    private int number;
+
+    public Pills(int duration, int cost, String name, int number) {
+        super(duration, cost, name);
+        this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Pills pills = (Pills) o;
+        return number == pills.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), number);
+    }
+
+    @Override
+    public String toString() {
+        return  "pills{" +
+                "number=" + number  +
+                ", duration=" + getDuration() +
+                ", cost=" + getCost() +
+                ", name='" + getName() + '\'' +
+                '}';
+    }
+}
+
+public class drops extends medicament{
+    public void valley(){
+        System.out.println("Drink");
+    }
+
+    public drops(int duration, int cost, String name) {
+        super(duration, cost, name);
+    }
+
+    @Override
+    public String toString() {
+        return  "drops{" +
+                "duration=" + getDuration() +
+                ", cost=" + getCost() +
+                ", name='" + getName() + '\'' +
+                '}';
+    }
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        Pills one = new Pills(3, 12, "Wad", 2 );
+        Pills two = new Pills(3, 12, "Wad", 2 );
+        Pills free = new Pills(1, 1, "Wadl", 3 );
+
+        drops alpha = new drops(6,20,"Wa");
+
+        medicament zero = new medicament(10,15,"horizon");
+
+        System.out.println(one.equals(two));
+        System.out.println(one.equals(free));
+
+        System.out.println(free);
+        System.out.println(zero);
+        System.out.println(alpha);
+
+        two.useMedicaments();
+        free.useMedicaments(one);
+
+        medicament last = new medicament(5);
+        System.out.println(last);
+
+
+
+    }
+}
